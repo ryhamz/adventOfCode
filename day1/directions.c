@@ -8,6 +8,7 @@ int main(int argc, char* argv) {
   int l = strlen(buff);
 
   int floor = 0; //this is what we are calculating. add 1 for '('; subtract 1 for ')'
+  int basementPos = 0; //this is the FIRST move that puts santa in the basement.
   int i;
   for (i = 0; i < l-1; i++) {
     //the current character is either ( or ), so
@@ -18,8 +19,12 @@ int main(int argc, char* argv) {
     else {
       floor--;
     }
+    if(floor < 0 && basementPos == 0)
+      {
+	basementPos = i +1;
+      }
   }
   fclose(f);
-  printf("Santa should go to floor %d.\n", floor);
+  printf("Santa should go to floor %d.\nHe was sent to the basement on move %d\n", floor, basementPos);
   return 1;
 }
